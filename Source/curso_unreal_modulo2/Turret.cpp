@@ -55,7 +55,7 @@ void ATurret::Shooting()
 {
 	if (!timerHandleRateShoot.IsValid()) {
 		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
-		cout<<"impresion en consola"<<endl;
+		//cout<<"impresion en consola"<<endl;
 		Shoot();
 		GetWorldTimerManager().SetTimer(timerHandleRateShoot, this, &ATurret::StopRate, timeBetweenShoot);
 	}
