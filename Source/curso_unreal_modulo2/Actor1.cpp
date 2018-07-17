@@ -15,10 +15,12 @@ AActor1::AActor1()
 void AActor1::BeginPlay()
 {	
 	Super::BeginPlay(); //ejecuta el BeginPlay() de la superclase que se reemplasa con el override
-
+	//inicia el tiempo de vida del Actor1
+	GetWorldTimerManager().SetTimer(timerHandleLive, this, &AActor1::Destroy, timeLive);
 	//inicia el loop de timers con Shoot
-	GetWorldTimerManager().SetTimer(timeHandleShoot, this, &AActor1::Shoot, timeBetweenShoot, true); //inicia timer de shoot
-	GetWorldTimerManager().SetTimer(timeHandleShootStop, this, &AActor1::ShootStop, timeShoot);	  //inicia timer para matar shoot
+	GetWorldTimerManager().SetTimer(timerHandleShoot, this, &AActor1::Shoot, timeBetweenShoot, true); //inicia timer de shoot
+	GetWorldTimerManager().SetTimer(timerHandleShootStop, this, &AActor1::ShootStop, timeShoot);	  //inicia timer para matar shoot
+
 }
 
 // Called every frame
@@ -49,25 +51,31 @@ void AActor1::Rotate()
 
 void AActor1::ShootStop()
 {
-	GetWorldTimerManager().ClearTimer(timeHandleShoot);		//mata timer de shoot
+	GetWorldTimerManager().ClearTimer(timerHandleShoot);		//mata timer de shoot
 
-	GetWorldTimerManager().SetTimer(timeHandleMoveStop, this, &AActor1::MoveStop, timeMove); //inicia timer para matar movimiento
-	GetWorldTimerManager().SetTimer(timeHandleMove, this, &AActor1::Move, timeBetweenMove, true);  //inicia timer de movimiento
+	GetWorldTimerManager().SetTimer(timerHandleMoveStop, this, &AActor1::MoveStop, timeMove); //inicia timer para matar movimiento
+	GetWorldTimerManager().SetTimer(timerHandleMove, this, &AActor1::Move, timeBetweenMove, true);  //inicia timer de movimiento
 }
 
 void AActor1::MoveStop()
 {
-	GetWorldTimerManager().ClearTimer(timeHandleMove); //mata timer de movimiento
+	GetWorldTimerManager().ClearTimer(timerHandleMove); //mata timer de movimiento
 
-	GetWorldTimerManager().SetTimer(timeHandleRotateStop, this, &AActor1::RotateStop, timeRotate);  //inicia timer para matar la rotacion
-	GetWorldTimerManager().SetTimer(timeHandleRotate, this, &AActor1::Rotate, timeBetweenRotate, true);  //inicia timer de rotacion
+	GetWorldTimerManager().SetTimer(timerHandleRotateStop, this, &AActor1::RotateStop, timeRotate);  //inicia timer para matar la rotacion
+	GetWorldTimerManager().SetTimer(timerHandleRotate, this, &AActor1::Rotate, timeBetweenRotate, true);  //inicia timer de rotacion
 }
 
 void AActor1::RotateStop()
 {
-	GetWorldTimerManager().ClearTimer(timeHandleRotate);  //mata timer de rotacion
+	GetWorldTimerManager().ClearTimer(timerHandleRotate);  //mata timer de rotacion
 
-	GetWorldTimerManager().SetTimer(timeHandleShootStop, this, &AActor1::ShootStop, timeShoot);  //inicia timer para matar shoot
-	GetWorldTimerManager().SetTimer(timeHandleShoot, this, &AActor1::Shoot, timeBetweenShoot, true);	//inicia timer de shoot
+	GetWorldTimerManager().SetTimer(timerHandleShootStop, this, &AActor1::ShootStop, timeShoot);  //inicia timer para matar shoot
+	GetWorldTimerManager().SetTimer(timerHandleShoot, this, &AActor1::Shoot, timeBetweenShoot, true);	//inicia timer de shoot
 
+}
+
+void AActor1::Destroy()
+{
+	Destroy();
+	GetWorldTimerManager().ClearTimer(timerHandleLive);
 }
