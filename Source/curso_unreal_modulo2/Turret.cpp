@@ -25,8 +25,8 @@ void ATurret::BeginPlay()
 void ATurret::Shoot()
 {
 	ammo--;
-	shootSocket = GetMesh()->GetSocketByName(FName("PointShoot"));
-	GetWorld()->SpawnActor<AActor>(ammoActorToShoot,shootSocket.GetActorLocation(),shootSocket.GetActorRotation()); 
+	// shootSocket = GetMesh()->GetSocketByName(FName("PointShoot"));
+	GetWorld()->SpawnActor<AActor>(ammoActorToShoot,GetActorLocation(),GetActorRotation()); 
 
 }
 
@@ -56,6 +56,7 @@ void ATurret::StopRate()
 void ATurret::Shooting()
 {
 	if (!timerHandleRateShoot.IsValid()) {
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
 		Shoot();
 		GetWorldTimerManager().SetTimer(timerHandleRateShoot, this, &ATurret::StopRate, timeBetweenShoot);
 	}
@@ -67,9 +68,11 @@ void ATurret::ShootOrRecharge()
 	if (ammo > 0) {
 		Shooting();
 	}else if(rechargeAmmo > 0 ){
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("debug!"));
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("RECHARGING!!!"));
+		// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("debug!"));
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("RECHARGING!!!"));
 		GetWorldTimerManager().SetTimer(timerHandleRecharge, this, &ATurret::Recharge, timeRecharge);
+	}else if(ammo ==0 && rechargeAmmo == 0){
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("NO AMMO!!"));
 	}
 }
  
@@ -82,7 +85,6 @@ void ATurret::Tick(float DeltaTime)
 	
 	if (!timerHandleRecharge.IsValid()) {
 		ShootOrRecharge();
-		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
 	}
 	else
 	{

@@ -37,7 +37,7 @@ protected:
 	UPROPERTY(VisibleAnywhere) float ammo = 10;		//municion actual en el cargador
 	UPROPERTY(EditAnywhere)	float timeBetweenShoot = 1;		//lapso de tiempo entre disparo SpawnActor()
 
-	UPROPERTY(VisibleAnywhere) EComponentSocketType shootSocket;
+	// UPROPERTY(VisibleAnywhere) EComponentSocketType shootSocket;
 
 
 public:	
