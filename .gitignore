@@ -2,3 +2,8 @@
 Binaries/
 Intermediate/
 Saved/
+/DerivedDataCache
+*.sln
+*.sdf
+*.suo
+

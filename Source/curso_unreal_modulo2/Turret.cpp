@@ -18,7 +18,7 @@ void ATurret::BeginPlay()
 	Super::BeginPlay();
 	
 	// GetWorldTimerManager().SetTimer(timerHandleTimer, this, &ATurret:Timer, timer, true);
-
+	comp = GetComponentByName(FName PointShoot);
 }
 
 
@@ -32,19 +32,17 @@ void ATurret::Shoot()
 
 void ATurret::Recharge()
 {
-	
-	//if (timerHandleRecharge) {
+
 		if(rechargeAmmo >= maxAmmo){
 			ammo = maxAmmo;
 			rechargeAmmo = rechargeAmmo - maxAmmo;
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("RECHARGED!!!"));
+			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("RECHARGED!!!"));
 		}else if(rechargeAmmo <= 0){
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("NO AMMO!!"));
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, TEXT("NO AMMO!!"));
 		}else{
 			ammo = rechargeAmmo;
 			rechargeAmmo = 0;
 		}
-	// }
 	GetWorldTimerManager().ClearTimer(timerHandleRecharge);
 }
 
@@ -57,6 +55,7 @@ void ATurret::Shooting()
 {
 	if (!timerHandleRateShoot.IsValid()) {
 		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
+		cout<<"impresion en consola"<<endl;
 		Shoot();
 		GetWorldTimerManager().SetTimer(timerHandleRateShoot, this, &ATurret::StopRate, timeBetweenShoot);
 	}
@@ -90,8 +89,5 @@ void ATurret::Tick(float DeltaTime)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Reload!"));
 	}
-	
-	
-	
 
 }
