@@ -8,22 +8,23 @@
 #include "Actor1.generated.h"
 
 UCLASS()
-class TUTO_UDEMY_MODULO_2_API AActor1 : public AActor
+class CURSO_UNREAL_MODULO2_API AActor1 : public AActor
 {
 	GENERATED_BODY()
+	
+public:	
+	// Sets default values for this actor's properties
+	AActor1();
 
-	protected:
-		// Called when the game starts or when spawned
-		virtual void BeginPlay() override; 		//sobre escribe el beguin play de la puperclase
-		
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override; 		//sobre escribe el beguin play de la puperclase
 
-	public:	
-		// Sets default values for this actor's properties
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
-		// Called every frame
-		virtual void Tick(float DeltaTime) override;
-
-		//velocidad de movimiento del actor
+	//velocidad de movimiento del actor
 		UPROPERTY(EditAnywhere) FVector velocity;
 
 		FTimerHandle timeHandleShoot; //identificador del timer 
@@ -64,7 +65,5 @@ class TUTO_UDEMY_MODULO_2_API AActor1 : public AActor
 		FRotator rotSpeed;
 
 		AActor1();
-
-		
-		
+	
 };

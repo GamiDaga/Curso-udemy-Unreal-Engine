@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class tuto_udemy_modulo_2 : ModuleRules
+public class curso_unreal_modulo2 : ModuleRules
 {
-	public tuto_udemy_modulo_2(ReadOnlyTargetRules Target) : base(Target)
+	public curso_unreal_modulo2(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	

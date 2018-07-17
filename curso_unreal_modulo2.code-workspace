@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "F:\\Program Files\\Epic Games\\UE_4.19"
 		}
 	],
 	"settings": {

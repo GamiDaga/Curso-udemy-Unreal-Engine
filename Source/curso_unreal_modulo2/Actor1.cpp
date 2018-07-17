@@ -1,20 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Actor1.h"
-#include "Engine/World.h"
-
 
 
 // Sets default values
-
-AActor1::AActor1() //constructor de si mismo
-{	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+AActor1::AActor1()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 }
 
 // Called when the game starts or when spawned
 void AActor1::BeginPlay()
 {
+	Super::BeginPlay();
+	
 	Super::BeginPlay(); //esto es para cuando reemplazo el meto ejecutar lo que hay en la superclase
 	//
 	GetWorldTimerManager().SetTimer(timeHandleShoot, this, &AActor1::ShootStop, timeShoot);
@@ -26,9 +27,13 @@ void AActor1::BeginPlay()
 // Called every frame
 void AActor1::Tick(float DeltaTime)
 {
+	Super::Tick(DeltaTime);
+
 	AddActorLocalOffset(velocity);
 	AddActorLocalRotation(rotSpeed);
-}	
+
+}
+
 
 
 //se ejecuta con un timer
