@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Turret.h"
+// #include "Engine/World"
 
 
 // Sets default values
@@ -16,12 +17,79 @@ void ATurret::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// GetWorldTimerManager().SetTimer(timerHandleTimer, this, &ATurret:Timer, timer, true);
+
 }
+
+
+void ATurret::Shoot()
+{
+	ammo--;
+	shootSocket = GetMesh()->GetSocketByName(FName("PointShoot"));
+	GetWorld()->SpawnActor<AActor>(ammoActorToShoot,shootSocket.GetActorLocation(),shootSocket.GetActorRotation()); 
+
+}
+
+void ATurret::Recharge()
+{
+	
+	//if (timerHandleRecharge) {
+		if(rechargeAmmo >= maxAmmo){
+			ammo = maxAmmo;
+			rechargeAmmo = rechargeAmmo - maxAmmo;
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("RECHARGED!!!"));
+		}else if(rechargeAmmo <= 0){
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("NO AMMO!!"));
+		}else{
+			ammo = rechargeAmmo;
+			rechargeAmmo = 0;
+		}
+	// }
+	GetWorldTimerManager().ClearTimer(timerHandleRecharge);
+}
+
+void ATurret::StopRate()
+{
+	GetWorldTimerManager().ClearTimer(timerHandleRateShoot);
+}
+
+void ATurret::Shooting()
+{
+	if (!timerHandleRateShoot.IsValid()) {
+		Shoot();
+		GetWorldTimerManager().SetTimer(timerHandleRateShoot, this, &ATurret::StopRate, timeBetweenShoot);
+	}
+}
+
+void ATurret::ShootOrRecharge()
+{
+	
+	if (ammo > 0) {
+		Shooting();
+	}else if(rechargeAmmo > 0 ){
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("debug!"));
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, TEXT("RECHARGING!!!"));
+		GetWorldTimerManager().SetTimer(timerHandleRecharge, this, &ATurret::Recharge, timeRecharge);
+	}
+}
+ 
 
 // Called every frame
 void ATurret::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	realTime = realTime + DeltaTime;
+	
+	if (!timerHandleRecharge.IsValid()) {
+		ShootOrRecharge();
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Reload!"));
+	}
+	
+	
+	
 
 }
-
