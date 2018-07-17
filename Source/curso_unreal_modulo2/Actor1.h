@@ -18,7 +18,7 @@ public:
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override; 		//sobre escribe el beguin play de la puperclase
+	virtual void BeginPlay() override; 		//sobre escribe el begin play de la superclase
 
 public:	
 	// Called every frame
@@ -35,21 +35,18 @@ public:
 		FTimerHandle timeHandleMoveStop;
 		FTimerHandle timeHandleLive;
 
+	//variables de los timers
+		UPROPERTY(EditAnywhere)	float timeShoot; 			//lapso de tiempo disparando
+		UPROPERTY(EditAnywhere)	float timeRotate;			//lapso de tiempo rotando
+		UPROPERTY(EditAnywhere)	float timeMove;				//lapso de tiempo moviendose
+		UPROPERTY(EditAnywhere)	float timeBetweenShoot;		//lapso de tiempo entre disparo SpawnActor()
+		UPROPERTY(EditAnywhere)	float timeBetweenMove;		//lapso de tiempo entre cada addActorLocalOffset()
+		UPROPERTY(EditAnywhere)	float timeBetweenRotate;	//lapso de tiempo entre cada addActorLocalRotation()
 
-		UPROPERTY(EditAnywhere)	float timeShoot;
-		UPROPERTY(EditAnywhere)	float timeRotate;
-		UPROPERTY(EditAnywhere)	float timeMove;
-		UPROPERTY(EditAnywhere)	float timeBetweenShoot;
-		UPROPERTY(EditAnywhere)	float timeBetweenMove;
-		UPROPERTY(EditAnywhere)	float timeBetweenRotate;
+		UPROPERTY(EditAnywhere)	FVector speedMove;			//direccion a la cual se mueve
+		UPROPERTY(EditAnywhere)	FRotator speedRotate;		//direccion a la cual rota
 
-		UPROPERTY(EditAnywhere)	float timeLive;
-
-		UPROPERTY(EditAnywhere)	FVector speedMove;
-		UPROPERTY(EditAnywhere)	FRotator speedRotate;
-
-		void Destroy();
-
+	//metodos de los timers
 		void Shoot();
 		void ShootStop();
 		void Rotate();
@@ -57,13 +54,6 @@ public:
 		void Move();
 		void MoveStop();
 
-		//deja para setear un actor para spawnear
-		UPROPERTY(EditAnywhere)
-		TSubclassOf<class AActor> objetToSpawn;
+		UPROPERTY(EditAnywhere) TSubclassOf<class AActor> objetToSpawn; //targt de actor para spawnear
 
-		UPROPERTY(EditAnywhere)
-		FRotator rotSpeed;
-
-		AActor1();
-	
 };
