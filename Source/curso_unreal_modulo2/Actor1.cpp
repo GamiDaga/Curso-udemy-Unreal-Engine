@@ -15,8 +15,6 @@ AActor1::AActor1()
 void AActor1::BeginPlay()
 {	
 	Super::BeginPlay(); //ejecuta el BeginPlay() de la superclase que se reemplasa con el override
-	//inicia el tiempo de vida del Actor1
-	GetWorldTimerManager().SetTimer(timerHandleLive, this, &AActor1::Destroy, timeLive);
 	//inicia el loop de timers con Shoot
 	GetWorldTimerManager().SetTimer(timerHandleShoot, this, &AActor1::Shoot, timeBetweenShoot, true); //inicia timer de shoot
 	GetWorldTimerManager().SetTimer(timerHandleShootStop, this, &AActor1::ShootStop, timeShoot);	  //inicia timer para matar shoot
@@ -72,10 +70,4 @@ void AActor1::RotateStop()
 	GetWorldTimerManager().SetTimer(timerHandleShootStop, this, &AActor1::ShootStop, timeShoot);  //inicia timer para matar shoot
 	GetWorldTimerManager().SetTimer(timerHandleShoot, this, &AActor1::Shoot, timeBetweenShoot, true);	//inicia timer de shoot
 
-}
-
-void AActor1::Destroy()
-{
-	Destroy();
-	GetWorldTimerManager().ClearTimer(timerHandleLive);
 }

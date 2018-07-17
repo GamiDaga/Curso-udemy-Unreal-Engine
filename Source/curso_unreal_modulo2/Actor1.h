@@ -33,7 +33,6 @@ public:
 		FTimerHandle timerHandleRotateStop;
 		FTimerHandle timerHandleMove;
 		FTimerHandle timerHandleMoveStop;
-		FTimerHandle timerHandleLive;			
 
 	//variables de los timers
 		UPROPERTY(EditAnywhere)	float timeShoot; 			//lapso de tiempo disparando
@@ -42,7 +41,6 @@ public:
 		UPROPERTY(EditAnywhere)	float timeBetweenShoot;		//lapso de tiempo entre disparo SpawnActor()
 		UPROPERTY(EditAnywhere)	float timeBetweenMove;		//lapso de tiempo entre cada addActorLocalOffset()
 		UPROPERTY(EditAnywhere)	float timeBetweenRotate;	//lapso de tiempo entre cada addActorLocalRotation()
-		UPROPERTY(EditAnywhere)	float timeLive;			//tiempo de vida del Actor1
 
 
 		UPROPERTY(EditAnywhere)	FVector speedMove;			//direccion a la cual se mueve
@@ -55,7 +53,6 @@ public:
 		void RotateStop();
 		void Move();
 		void MoveStop();
-		void Destroy();
 
 		UPROPERTY(EditAnywhere) TSubclassOf<class AActor> objetToSpawn; //targt de actor para spawnear
 
