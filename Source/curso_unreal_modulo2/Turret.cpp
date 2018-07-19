@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Turret.h"
-// #include "Engine/World"
+#include "Engine/World.h"  //esto lo acabo de inclior recien solo por que me acorde, siempre andubo el proyecto sin incluirlo (acunque despues de incluirlo intente denuevo y no andubo igual)
 
 
 // Sets default values
@@ -18,7 +18,7 @@ void ATurret::BeginPlay()
 	Super::BeginPlay();
 	
 	// GetWorldTimerManager().SetTimer(timerHandleTimer, this, &ATurret:Timer, timer, true);
-	comp = GetComponentByName(FName PointShoot);
+	// comp = GetComponentByName(FName PointShoot);
 }
 
 
@@ -55,6 +55,7 @@ void ATurret::Shooting()
 {
 	if (!timerHandleRateShoot.IsValid()) {
 		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
+
 		//cout<<"impresion en consola"<<endl;
 		Shoot();
 		GetWorldTimerManager().SetTimer(timerHandleRateShoot, this, &ATurret::StopRate, timeBetweenShoot);
