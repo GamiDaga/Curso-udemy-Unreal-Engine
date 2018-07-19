@@ -15,6 +15,10 @@ public:
 	// Sets default values for this actor's properties
 	ABullet();
 
+private:
+	UFUNCTION() void OnOverlap(AActor* me, AActor* other);
+	UPROPERTY(EditAnywhere) int damage;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

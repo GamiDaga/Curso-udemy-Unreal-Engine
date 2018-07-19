@@ -15,9 +15,16 @@ public:
 	// Sets default values for this pawn's properties
 	AEnemyMagian();
 
+private:
+
+	UPROPERTY(VisibleAnywhere) int life;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere) int initialLife = 40;
+
 
 public:	
 	// Called every frame
@@ -26,6 +33,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void ProcessDamageIn(int damage);
 	
 	
 };

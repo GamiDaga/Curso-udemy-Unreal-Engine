@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Bullet.h"
+#include "Characters/Enemys/EnemyMagian.h"
+#include "Engine/Engine.h"
 
 
 // Sets default values
@@ -16,12 +18,29 @@ void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	OnActorBeginOverlap.AddDynamic(this, &ABullet::OnOverlap);
 }
 
 // Called every frame
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	AddActorLocalOffset(FVector(100, 0, 0) * DeltaTime, true);
 
 }
 
+void ABullet::OnOverlap(AActor* me, AActor* other)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("Overlap Detected"));
+	if (AEnemyMagian* enemy = Cast<AEnemyMagian>(other))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y soy EnemyMagian"));
+		//other->ProcessDamageIn(damage);
+		Cast<AEnemyMagian>(other)->ProcessDamageIn(damage);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y NO soy EnemyMagian"));
+
+	}
+}
