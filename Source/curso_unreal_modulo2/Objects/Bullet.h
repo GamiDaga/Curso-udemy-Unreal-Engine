@@ -17,7 +17,9 @@ public:
 
 private:
 	UFUNCTION() void OnOverlap(AActor* me, AActor* other);
-	UPROPERTY(EditAnywhere) int damage;
+	UPROPERTY(EditAnywhere) int damage = 10;
+	UPROPERTY(EditAnywhere) float speedBullet = 1000;
+
 
 protected:
 	// Called when the game starts or when spawned

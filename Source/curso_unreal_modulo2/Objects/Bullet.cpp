@@ -25,7 +25,7 @@ void ABullet::BeginPlay()
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	AddActorLocalOffset(FVector(100, 0, 0) * DeltaTime, true);
+	AddActorLocalOffset(FVector(speedBullet * DeltaTime, 0, 0) , true);
 
 }
 
@@ -37,6 +37,7 @@ void ABullet::OnOverlap(AActor* me, AActor* other)
 		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y soy EnemyMagian"));
 		//other->ProcessDamageIn(damage);
 		Cast<AEnemyMagian>(other)->ProcessDamageIn(damage);
+		Destroy();
 	}
 	else
 	{
