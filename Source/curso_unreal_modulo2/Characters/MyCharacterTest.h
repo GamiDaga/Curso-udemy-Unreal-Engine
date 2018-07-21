@@ -3,20 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
-#include "CharacterSC.generated.h"
+#include "GameFramework/Character.h"
+#include "MyCharacterTest.generated.h"
 
 UCLASS()
-class CURSO_UNREAL_MODULO2_API ACharacterSC : public APawn
+class CURSO_UNREAL_MODULO2_API AMyCharacterTest : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	ACharacterSC();
-
-private:
-	int life;
+	// Sets default values for this character's properties
+	AMyCharacterTest();
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,11 +26,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void ProcessDamageIn(int damage);
-
-
-	void setLife(int newLife);
-
-	int getLife();
+	
 	
 };

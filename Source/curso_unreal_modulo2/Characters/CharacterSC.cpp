@@ -37,3 +37,12 @@ void ACharacterSC::ProcessDamageIn(int damage)
 	}
 }
 
+void ACharacterSC::setLife(int newLife)
+{
+	life = newLife;
+}
+
+int ACharacterSC::getLife()
+{
+	return life;
+}

@@ -2,6 +2,7 @@
 
 #include "Bullet.h"
 #include "Characters/Enemys/EnemyMagian.h"
+#include "Characters/Players/Player1.h"
 #include "Engine/Engine.h"
 
 
@@ -31,17 +32,24 @@ void ABullet::Tick(float DeltaTime)
 
 void ABullet::OnOverlap(AActor* me, AActor* other)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("Overlap Detected"));
+	//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("Overlap Detected"));
 	if (AEnemyMagian* enemy = Cast<AEnemyMagian>(other))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y soy EnemyMagian"));
+		//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y soy EnemyMagian"));
 		//other->ProcessDamageIn(damage);
 		Cast<AEnemyMagian>(other)->ProcessDamageIn(damage);
 		Destroy();
 	}
+	else if (APlayer1* player1 = Cast<APlayer1>(other))
+	{
+		//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y soy EnemyMagian"));
+		//other->ProcessDamageIn(damage);
+		Cast<APlayer1>(other)->ProcessDamageIn(damage);
+		Destroy();
+	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y NO soy EnemyMagian"));
+		//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Magenta, TEXT("choque y NO soy EnemyMagian"));
 
 	}
 }

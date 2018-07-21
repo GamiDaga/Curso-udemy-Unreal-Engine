@@ -49,5 +49,7 @@ void AEnemyMagian::ProcessDamageIn(int damage)
 	{
 		life = 0;
 	}
+	//GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Green, TEXT(life));
+
 }
 

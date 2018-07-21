@@ -13,8 +13,16 @@ UCLASS()
 class CURSO_UNREAL_MODULO2_API Acurso_unreal_modulo2GameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+
+
+
+	UPROPERTY(VisibleAnywhere)
+	int actualScore;
 	
-	
+	UPROPERTY(EditAnywhere)
+	int scoreToWin;
 	
 	
 };

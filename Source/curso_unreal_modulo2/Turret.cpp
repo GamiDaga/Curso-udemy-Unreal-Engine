@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Turret.h"
-#include "Engine/World.h"  //esto lo acabo de inclior recien solo por que me acorde, siempre andubo el proyecto sin incluirlo (acunque despues de incluirlo intente denuevo y no andubo igual)
 #include "Engine/Engine.h"
+#include "Engine/World.h"  //esto lo acabo de inclior recien solo por que me acorde, siempre andubo el proyecto sin incluirlo (acunque despues de incluirlo intente denuevo y no andubo igual)
+#include "TimerManager.h"
+
 
 
 // Sets default values
@@ -37,9 +39,9 @@ void ATurret::Recharge()
 		if(rechargeAmmo >= maxAmmo){
 			ammo = maxAmmo;
 			rechargeAmmo = rechargeAmmo - maxAmmo;
-			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("RECHARGED!!!"));
+			GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("Turret: RECHARGED!!!"));
 		}else if(rechargeAmmo <= 0){
-			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, TEXT("NO AMMO!!"));
+			GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, TEXT("Turret: NO AMMO 1!!"));
 		}else{
 			ammo = rechargeAmmo;
 			rechargeAmmo = 0;
@@ -55,9 +57,8 @@ void ATurret::StopRate()
 void ATurret::Shooting()
 {
 	if (!timerHandleRateShoot.IsValid()) {
-		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Shooting!" ));
+		GEngine->AddOnScreenDebugMessage(-1, 0.015f, FColor::Yellow, TEXT("Turret: Shooting!" ));
 
-		//cout<<"impresion en consola"<<endl;
 		Shoot();
 		GetWorldTimerManager().SetTimer(timerHandleRateShoot, this, &ATurret::StopRate, timeBetweenShoot);
 	}
@@ -70,10 +71,10 @@ void ATurret::ShootOrRecharge()
 		Shooting();
 	}else if(rechargeAmmo > 0 ){
 		// GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("debug!"));
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("RECHARGING!!!"));
+		//GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Yellow, TEXT("RECHARGING!!!"));
 		GetWorldTimerManager().SetTimer(timerHandleRecharge, this, &ATurret::Recharge, timeRecharge);
 	}else if(ammo ==0 && rechargeAmmo == 0){
-		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("NO AMMO!!"));
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Turret: NO AMMO 2!!"));
 	}
 }
  
@@ -89,7 +90,7 @@ void ATurret::Tick(float DeltaTime)
 	}
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Reload!"));
+		GEngine->AddOnScreenDebugMessage(-1, 0.01f, FColor::Yellow, TEXT("Turret: Reload!"));
 	}
 
 }
